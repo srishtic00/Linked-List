@@ -1,0 +1,13 @@
+void reversePrint(SinglyLinkedListNode* head) {
+SinglyLinkedListNode* curr=head;
+  if(curr==NULL || curr->next==NULL)
+  {
+      printf("%d\n",curr->data);
+  }
+  else
+  {
+      reversePrint(curr->next);
+      printf("%d\n",curr->data);
+  }
+
+}
