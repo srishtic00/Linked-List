@@ -1,0 +1,75 @@
+SinglyLinkedListNode* mergeLists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+
+SinglyLinkedListNode* head3=(SinglyLinkedListNode*)malloc(sizeof(SinglyLinkedListNode));
+if(head1->data>head2->data)
+{
+    head3->data=head2->data;
+    head3->next=NULL;
+    head2=head2->next;
+
+}
+else
+{
+   head3->data=head1->data;
+    head3->next=NULL;
+    head1=head1->next;
+ 
+}
+while(head1 && head2)
+{
+    SinglyLinkedListNode* newn=(SinglyLinkedListNode*)malloc(sizeof(SinglyLinkedListNode));
+    if(head1->data>head2->data)
+    {
+        newn->data=head2->data;
+        SinglyLinkedListNode* curr=head3;
+        while(curr && curr->next)
+        {
+            curr=curr->next;
+        }
+        curr->next=newn;
+        newn->next=NULL;
+        head2=head2->next;
+    }
+    else
+    {
+        newn->data=head1->data;
+        SinglyLinkedListNode* curr=head3;
+        while(curr && curr->next)
+        {
+            curr=curr->next;
+        }
+        curr->next=newn;
+        newn->next=NULL;
+        head1=head1->next;
+    }
+}
+while(head1)
+{
+ SinglyLinkedListNode* newn=(SinglyLinkedListNode*)malloc(sizeof(SinglyLinkedListNode));
+ newn->data=head1->data;
+ SinglyLinkedListNode* curr=head3; 
+ while(curr && curr->next)
+        {
+            curr=curr->next;
+        }
+curr->next=newn;
+newn->next=NULL;
+head1=head1->next;  
+}
+while(head2)
+{
+ SinglyLinkedListNode* newn=(SinglyLinkedListNode*)malloc(sizeof(SinglyLinkedListNode));
+ newn->data=head2->data;
+ SinglyLinkedListNode* curr=head3; 
+ while(curr && curr->next)
+        {
+            curr=curr->next;
+        }
+curr->next=newn;
+newn->next=NULL;
+head2=head2->next; 
+}
+return head3;
+
+
+}
