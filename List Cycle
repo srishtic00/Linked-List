@@ -1,0 +1,22 @@
+listnode* detectCycle(listnode* A) {
+    listnode *slow = A, *fast = A; 
+    //listnode *intersect=A;
+    //listnode *start=A;
+    while (fast && fast->next) { 
+        slow = slow->next; 
+        fast = fast->next->next; 
+        if (slow == fast) { 
+           break;
+           
+        } 
+    } 
+    if (slow != fast) 
+        return NULL; 
+    slow = A; 
+    while (slow != fast) { 
+        slow = slow->next; 
+        fast = fast->next; 
+    } 
+  
+    return slow;
+}
