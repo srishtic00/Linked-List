@@ -1,63 +1,51 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-/*ListNode* reverseList(ListNode* head)
-{
-    ListNode* curr=head;
-if(curr==NULL || curr->next==NULL)
-return curr;
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
 
-ListNode* rest=reverseList(curr->next);
-curr->next->next=curr;
-curr->next=NULL;
-return rest;
-}*/
-void helper(ListNode*& left, ListNode* right, bool &answer){
-
-if(right != NULL){
-helper(left, right->next, answer);
-if(left->val != right->val){
-answer = false;
-return;
-}
-    left = left->next;
-    }
-}
-    
-class Solution {
-public:
-    bool isPalindrome(ListNode* head) {
-        /*ListNode* curr=head;
-        ListNode* reverse=reverseList(head);
-        
-        while(curr)
-        {
-            cout<<curr->val<<endl;
-            curr=curr->next;
-        }
-        curr=head;
-       while(reverse && curr)
-       {
-           if(curr->val==reverse->val)
-           {
-               curr=curr->next;
-               reverse=reverse->next;
-           }
-           else
-           {
-               return false;
-           }
-       }
-        return true;*/
-        bool answer=true;
-        helper(head,head,answer);
-        return answer;
-        
-        
-    }
+struct ListNode {
+	int val;
+	struct ListNode *next;
 };
+
+typedef struct ListNode listnode;
+
+listnode* listnode_new(int val) {
+	listnode* node = (listnode *) malloc(sizeof(listnode));
+	node->val = val;
+	node->next = NULL;
+	return node;
+}
+
+void addNode(listnode* A, int i){
+	listnode* temp = listnode_new(i);
+	listnode* t = A;
+	while(t->next != NULL){
+		t = t->next;
+	}
+	t->next = temp;
+}
+
+/*
+ * Complete the function below.
+ */
+ listnode* temp;
+ int check(listnode* p)
+ {
+     if(p==NULL)
+     return true;
+     int ispal=check(p->next)&&(temp->val==p->val);
+     temp=temp->next;
+     return ispal;
+ }
+ 
+int isPalin(listnode* A){
+   
+temp=A;
+return check(A);
+
+
+}
