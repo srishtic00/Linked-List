@@ -1,51 +1,42 @@
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <limits.h>
-#include <stdbool.h>
-
-struct ListNode {
-	int val;
-	struct ListNode *next;
-};
-
-typedef struct ListNode listnode;
-
-listnode* listnode_new(int val) {
-	listnode* node = (listnode *) malloc(sizeof(listnode));
-	node->val = val;
-	node->next = NULL;
-	return node;
+struct ListNode* reverse(struct ListNode* head)
+{
+   struct ListNode* curr=head;
+    if(curr==NULL || curr->next==NULL)
+    {
+        return curr;
+    }
+    struct ListNode* rest=reverse(curr->next);
+    curr->next->next=curr;
+    curr->next=NULL;
+    return rest;
 }
-
-void addNode(listnode* A, int i){
-	listnode* temp = listnode_new(i);
-	listnode* t = A;
-	while(t->next != NULL){
-		t = t->next;
-	}
-	t->next = temp;
-}
-
-/*
- * Complete the function below.
- */
- listnode* temp;
- int check(listnode* p)
- {
-     if(p==NULL)
-     return true;
-     int ispal=check(p->next)&&(temp->val==p->val);
-     temp=temp->next;
-     return ispal;
- }
- 
-int isPalin(listnode* A){
-   
-temp=A;
-return check(A);
-
-
+bool isPalindrome(struct ListNode* head){
+    if(!head || !head->next)
+        return true;
+    if(head->next->next==NULL)
+    {
+        if(head->val==head->next->val)
+            return true;
+        else
+            return false;
+    }
+ struct ListNode * slow=head;
+       struct ListNode* fast=head;
+        while(fast && fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+   struct ListNode* node=(struct ListNode*)malloc(sizeof(struct ListNode));
+        node=reverse(slow);
+    printf("%d %d",node->val,node->next->val);
+       struct ListNode* curr=head;
+        while(curr && node)
+        {
+            if(curr->val!=node->val)
+                return false;
+            curr=curr->next;
+            node=node->next;
+        }
+        return true;
 }
